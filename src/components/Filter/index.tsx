@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { usePlaylists } from '../../context/PlaylistsContext';
+import useDebounce from '../../hooks/useDebounce';
 import { auth, getFilters, getPlaylists } from '../../services/api/endpoints';
 import Select from '../Select';
 
@@ -18,6 +19,7 @@ const Filter: React.FC = () => {
   const [locales, setLocales] = useState<IOptions[]>([]);
   const [countries, setCountries] = useState<IOptions[]>([]);
   const [filters, setFilters] = useState<IFilter>();
+  const [message, setMessage] = useState<string>('');
   const { updatePlaylists, toggleLoad } = usePlaylists();
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const Filter: React.FC = () => {
 
   useEffect(() => {
     if (filters) {
-      getPlaylistsData(filters.country, filters.locale);
+      debouncedgetPlaylistsData(filters.country, filters.locale);
     }
   }, [filters]);
 
@@ -44,12 +46,17 @@ const Filter: React.FC = () => {
       toggleLoad(true);
       await auth();
       const data = await getPlaylists({ country, locale });
+
+      setMessage(data.message);
+
       updatePlaylists(data.playlists.items);
     } catch (err) {
       console.log(err);
     }
     toggleLoad(false);
   };
+
+  const debouncedgetPlaylistsData = useDebounce(getPlaylistsData, 500);
 
   const handleChangeFilter = async (value: string, filter: string) => {
     if (filters) setFilters({ ...filters, [filter]: value });

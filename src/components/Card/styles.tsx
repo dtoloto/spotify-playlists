@@ -40,7 +40,7 @@ export const PlayButton = styled.div`
   justify-content: center;
   font-size: 1.5rem;
   color: #fff;
-  transform: translateY(20%);
+  transform: translateY(8px);
   opacity: 0;
 `;
 

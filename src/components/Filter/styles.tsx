@@ -7,4 +7,5 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: flex-end;
   text-align: right;
+  align-items: center;
 `;
