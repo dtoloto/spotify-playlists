@@ -22,11 +22,19 @@ const Filter: React.FC = () => {
   const [filters, setFilters] = useState<IFilter>();
   const { updatePlaylists, toggleLoad } = usePlaylists();
 
+  const handleTimer = () => {
+    console.log(1);
+    console.log(filters);
+
+    if (filters) {
+      console.log(2);
+
+      debouncedgetPlaylistsData(filters.country, filters.locale);
+    }
+  };
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      alert('Oi');
-      getPlaylistsData(filters.country, filters.locale);
-    }, 10000);
+    const timer = setInterval(handleTimer, 10000);
     return () => clearTimeout(timer);
   }, []);
 
