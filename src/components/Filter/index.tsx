@@ -33,14 +33,18 @@ const Filter: React.FC = () => {
 
   useEffect(() => {
     const getFiltersData = async () => {
-      const response = await getFilters();
-      setLocales(response.filters[0].values);
-      setCountries(response.filters[1].values);
-      setFilters({
-        locale: response.filters[0].values[0].value,
-        country: response.filters[1].values[0].value,
-        pattern: response.filters[2].validation.pattern,
-      });
+      try {
+        const response = await getFilters();
+        setLocales(response.filters[0].values);
+        setCountries(response.filters[1].values);
+        setFilters({
+          locale: response.filters[0].values[0].value,
+          country: response.filters[1].values[0].value,
+          pattern: response.filters[2].validation.pattern,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     getFiltersData();

@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Spotify Featured Playlists
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Spotify Featured Playlists, as the name suggests, is a single page application, developed with ReactJS, where users can check all featured playlists at Spotify according to some criteria, like Country, for example.
 
-## Available Scripts
+As we live in a dynamic world, the page refreshes its content every 30 seconds, to obtain updated data.
 
-In the project directory, you can run:
+**[Demo](https://spotify-playlists-tau.vercel.app/)**
 
-### `yarn start`
+## Spotify API
+The [Spotify API](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-featured-playlists) was consumed to get playlists data.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
+### Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Clone this project using:
 
-### `yarn test`
+    $ git https://github.com/dtoloto/spotify-playlists
+    $ cd spotify-playlists
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Once you have the project, install all dependencies:
 
-### `yarn build`
+    $ yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Then, you have to create the `.env` file with the following fields and replace with your own data:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    REACT_APP_SPOTIFY_URL= https://api.spotify.com/v1
+    REACT_APP_SPOTIFY_AUTH= https://accounts.spotify.com/api/token
+    REACT_APP_SPOTIFY_CLIENT_ID= YOUR_SPOTIFY_CLIENT_ID
+    REACT_APP_SPOTIFY_CLIENT_SECRET= YOUR_SPOTIFY_CLIENT_SECRET
+    REACT_APP_FILTER_API= https://www.mocky.io/v2/5a25fade2e0000213aa90776
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Running
+Once the installation is done, you can run the following command:
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+    $ yarn start
