@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePlaylists } from '../../context/PlaylistsContext';
 import useDebounce from '../../hooks/useDebounce';
+import useInterval from '../../hooks/useInterval';
 import { auth, getFilters, getPlaylists } from '../../services/api/endpoints';
 import Select from '../Select';
 
@@ -22,21 +23,13 @@ const Filter: React.FC = () => {
   const [filters, setFilters] = useState<IFilter>();
   const { updatePlaylists, toggleLoad } = usePlaylists();
 
-  const handleTimer = () => {
-    console.log(1);
-    console.log(filters);
-
+  const intervalRef = useInterval(() => {
     if (filters) {
-      console.log(2);
-
       debouncedgetPlaylistsData(filters.country, filters.locale);
+    } else {
+      window.clearInterval(intervalRef.current);
     }
-  };
-
-  useEffect(() => {
-    const timer = setInterval(handleTimer, 10000);
-    return () => clearTimeout(timer);
-  }, []);
+  }, 30000);
 
   useEffect(() => {
     const getFiltersData = async () => {
@@ -49,6 +42,7 @@ const Filter: React.FC = () => {
         pattern: response.filters[2].validation.pattern,
       });
     };
+
     getFiltersData();
   }, []);
 
