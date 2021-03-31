@@ -13,14 +13,22 @@ interface IOptions {
 interface IFilter {
   locale: string;
   country: string;
+  pattern: string;
 }
 
 const Filter: React.FC = () => {
   const [locales, setLocales] = useState<IOptions[]>([]);
   const [countries, setCountries] = useState<IOptions[]>([]);
   const [filters, setFilters] = useState<IFilter>();
-  const [message, setMessage] = useState<string>('');
   const { updatePlaylists, toggleLoad } = usePlaylists();
+
+  useEffect(() => {
+    setInterval(() => {
+      if (filters) {
+        debouncedgetPlaylistsData(filters.country, filters.locale);
+      }
+    }, 30000);
+  }, []);
 
   useEffect(() => {
     const getFiltersData = async () => {
@@ -30,6 +38,7 @@ const Filter: React.FC = () => {
       setFilters({
         locale: response.filters[0].values[0].value,
         country: response.filters[1].values[0].value,
+        pattern: response.filters[2].validation.pattern,
       });
     };
     getFiltersData();
@@ -45,9 +54,11 @@ const Filter: React.FC = () => {
     try {
       toggleLoad(true);
       await auth();
-      const data = await getPlaylists({ country, locale });
-
-      setMessage(data.message);
+      const data = await getPlaylists({
+        country,
+        locale,
+        pattern: filters.pattern,
+      });
 
       updatePlaylists(data.playlists.items);
     } catch (err) {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { format } from 'date-fns';
 import api from '.';
 
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
@@ -40,20 +41,30 @@ export const auth = async () => {
 interface IPlaylists {
   country: string;
   locale: string;
+  pattern: string;
 }
 
-export const getPlaylists = async ({ country, locale }: IPlaylists) => {
+export const getPlaylists = async ({
+  country,
+  locale,
+  pattern,
+}: IPlaylists) => {
   try {
+    const timestamp = format(
+      new Date().getTime(),
+      pattern.split('T').join(`'T'`),
+    );
+
     const { data } = await api.get('/featured-playlists', {
       params: {
         country,
         locale,
+        timestamp,
       },
     });
+
     return data;
   } catch (err) {
-    console.log(err.response.data);
-
     throw new Error('Filed to get playlists');
   }
 };

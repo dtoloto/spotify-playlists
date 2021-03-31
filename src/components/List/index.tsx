@@ -25,7 +25,8 @@ const List: React.FC = () => {
       </IF>
 
       <IF condition={loading}>
-        {[...Array(10)].map(i => (
+        {[...Array(10)].map((_, i) => (
+          // eslint-disable-next-line react/no-array-index-key
           <Col key={i} span={2} xs={12} sm={6} md={4}>
             <Skeleton />
           </Col>
