@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import theme from './theme';
 
 export default createGlobalStyle`
   *{
@@ -9,6 +10,10 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     font-family: 'Montserrat', sans-serif;
     transition: .2s;
+  }
+
+  body{
+    background: ${theme.colors.dark};
   }
 
   a{
