@@ -8,6 +8,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     font-family: 'Montserrat', sans-serif;
+    transition: .2s;
   }
 
   a{

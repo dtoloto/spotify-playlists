@@ -1,9 +1,14 @@
 import React from 'react';
+import List from '../../components/List';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 const Home: React.FC = () => {
-  return <h1>Teste</h1>;
+  return (
+    <Container>
+      <List />
+    </Container>
+  );
 };
 
 export default Home;
