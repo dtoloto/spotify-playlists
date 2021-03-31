@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { usePlaylists } from '../../context/PlaylistsContext';
 import { auth, getFilters, getPlaylists } from '../../services/api/endpoints';
 import Select from '../Select';
 
@@ -17,6 +18,7 @@ const Filter: React.FC = () => {
   const [locales, setLocales] = useState<IOptions[]>([]);
   const [countries, setCountries] = useState<IOptions[]>([]);
   const [filters, setFilters] = useState<IFilter>();
+  const { updatePlaylists, toggleLoad } = usePlaylists();
 
   useEffect(() => {
     const getFiltersData = async () => {
@@ -39,12 +41,14 @@ const Filter: React.FC = () => {
 
   const getPlaylistsData = async (country: string, locale: string) => {
     try {
+      toggleLoad(true);
       await auth();
       const data = await getPlaylists({ country, locale });
-      console.log(data);
+      updatePlaylists(data.playlists.items);
     } catch (err) {
       console.log(err);
     }
+    toggleLoad(false);
   };
 
   const handleChangeFilter = async (value: string, filter: string) => {

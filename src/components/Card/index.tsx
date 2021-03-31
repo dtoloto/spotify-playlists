@@ -9,21 +9,13 @@ interface IProps {
   description: string;
 }
 
-const Card: React.FC = () => {
+const Card: React.FC<IProps> = ({ link, image, name, description }) => {
   return (
-    <a href="/" target="_blank">
+    <a href={link} target="_blank" rel="noreferrer">
       <Container>
-        <Image
-          src="https://i.scdn.co/image/ab67706f0000000397e40cbd3fce67e782deaf14"
-          alt="/"
-        />
-        <Name>Nome da Playlist</Name>
-        <Description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-          iusto laborum ipsam nemo, dolores similique quae earum velit vero modi
-          exercitationem dolorum odit mollitia fugiat beatae. Vel doloribus
-          quidem vitae.
-        </Description>
+        <Image src={image} alt="/" />
+        <Name>{name}</Name>
+        <Description>{description}</Description>
       </Container>
     </a>
   );

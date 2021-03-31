@@ -4,13 +4,16 @@ import theme from './styles/theme';
 import GlobalStyle from './styles';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import { PlaylistsProvider } from './context/PlaylistsContext';
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Navbar />
-      <Home />
+      <PlaylistsProvider>
+        <GlobalStyle />
+        <Navbar />
+        <Home />
+      </PlaylistsProvider>
     </ThemeProvider>
   );
 };
