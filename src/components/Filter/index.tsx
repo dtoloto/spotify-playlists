@@ -23,16 +23,11 @@ const Filter: React.FC = () => {
   const { updatePlaylists, toggleLoad } = usePlaylists();
 
   useEffect(() => {
-    setInterval(() => {
-      console.log('teste');
-      console.log(filters);
-
-      if (filters) {
-        console.log('teste 1');
-
-        getPlaylistsData(filters.country, filters.locale);
-      }
-    }, 30000);
+    const timer = setInterval(() => {
+      alert('Oi');
+      getPlaylistsData(filters.country, filters.locale);
+    }, 10000);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
