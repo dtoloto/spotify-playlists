@@ -1,6 +1,7 @@
 import React from 'react';
+import { AiOutlineCaretDown } from 'react-icons/ai';
 
-import { Container, Label, StyledSelect } from './styles';
+import { Container, Label, StyledSelect, Content, ArrowDown } from './styles';
 
 interface IOptions {
   value: string;
@@ -21,13 +22,18 @@ const Select: React.FC<IProps> = ({ label, onChange, options, filter }) => {
   return (
     <Container>
       <Label>{label}</Label>
-      <StyledSelect onChange={handleChange}>
-        {options.map(item => (
-          <option key={item.value} value={item.value}>
-            {item.name}
-          </option>
-        ))}
-      </StyledSelect>
+      <Content>
+        <StyledSelect onChange={handleChange}>
+          {options.map(item => (
+            <option key={item.value} value={item.value}>
+              {item.name}
+            </option>
+          ))}
+        </StyledSelect>
+        <ArrowDown>
+          <AiOutlineCaretDown />
+        </ArrowDown>
+      </Content>
     </Container>
   );
 };

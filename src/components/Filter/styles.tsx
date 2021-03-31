@@ -5,4 +5,6 @@ export const Container = styled.div`
   margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  text-align: right;
 `;
