@@ -25,7 +25,8 @@ const Filter: React.FC = () => {
   useEffect(() => {
     setInterval(() => {
       if (filters) {
-        debouncedgetPlaylistsData(filters.country, filters.locale);
+        getPlaylistsData(filters.country, filters.locale);
+        console.log('aqui');
       }
     }, 30000);
   }, []);
