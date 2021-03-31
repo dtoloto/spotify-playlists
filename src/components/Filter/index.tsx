@@ -24,9 +24,10 @@ const Filter: React.FC = () => {
 
   useEffect(() => {
     setInterval(() => {
+      console.log('teste');
+
       if (filters) {
         getPlaylistsData(filters.country, filters.locale);
-        console.log('aqui');
       }
     }, 30000);
   }, []);
